@@ -1,0 +1,31 @@
+{
+  "status": "approved_for_delivery",
+  "base_sha": "6dc53d360a2f05bebcb9b8e61c4141f52c47b039",
+  "head_sha": "b419e80bf0eee6ab63571db177293bc3f0ec79dc",
+  "head_sha_semantics": "research content commit immediately preceding this completion-record-only commit",
+  "pr_url": "https://github.com/pallakatos/kars-pr-e2e-demo/pull/15",
+  "pr_number": 15,
+  "criteria_ids": [
+    "NPT-PRIV-001",
+    "NPT-PRIV-002",
+    "NPT-PRIV-003",
+    "NPT-PRIV-004",
+    "NPT-PRIV-005",
+    "NPT-PRIV-006",
+    "NPT-PRIV-007",
+    "NPT-PRIV-008",
+    "NPT-PRIV-009",
+    "NPT-PRIV-010",
+    "NPT-PRIV-011",
+    "NPT-PRIV-012"
+  ],
+  "evidence_manifest_sha256": "a71296aa4092e676178a75a16d61315772c51525f90da8defba3265dcbf25821",
+  "proof_stamp": "SKILL_EXEC_OK:NORTHSTAR-RESEARCH-2026\n",
+  "limitations": [
+    "Synthetic evidence does not establish production accuracy or performance.",
+    "No compliance certification, NIST endorsement, or legal determination is claimed.",
+    "This research PR does not implement or deploy production code.",
+    "V1 deliberately sends attachments, HTML, novel formats, and uncertain detections to manual review.",
+    "The recorded head SHA identifies the immutable research-content commit because a Git commit cannot contain its own SHA; the PR tip adds only this completion record."
+  ]
+}
