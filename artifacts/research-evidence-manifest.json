@@ -1,0 +1,52 @@
+{
+  "authoritative_web": {
+    "alternate_used": false,
+    "final_url": "https://www.nist.gov/privacy-framework",
+    "first_page_available": true,
+    "requirement": "Treat privacy disclosure as enterprise risk with explicit identify, control, measurement, and review points.",
+    "retrieved_at": "2026-07-13T23:41:12Z",
+    "title": "Privacy Framework | NIST",
+    "tool": "managed Playwright"
+  },
+  "compliance_certification_claim": false,
+  "everything_mcp": {
+    "echo_stdout": "Echo: NORTHSTAR_RESEARCH_MISSION",
+    "sum_stdout": "The sum of 37 and 5 is 42."
+  },
+  "limitations": [
+    "Synthetic evidence does not establish production performance.",
+    "No compliance certification is claimed.",
+    "No production code is implemented."
+  ],
+  "mission": "NORTHSTAR_RESEARCH_MISSION",
+  "proof": {
+    "command": "bash /opt/clawhub-skills/proof-stamper/proof.sh NORTHSTAR-RESEARCH-2026",
+    "exact_stdout": "SKILL_EXEC_OK:NORTHSTAR-RESEARCH-2026\n"
+  },
+  "repository": {
+    "base_branch": "main",
+    "base_commit": "6dc53d360a2f05bebcb9b8e61c4141f52c47b039",
+    "files": [
+      {
+        "blob_sha": "8266efa4f8740945860220be0b837c7918f5564c",
+        "path": "src/email_validator.py"
+      },
+      {
+        "blob_sha": "35ebe55a0747a4c73945d50a9a553c4494fa7a6b",
+        "path": "tests/test_email_validator.py"
+      },
+      {
+        "blob_sha": "d2b707f1aad7c86417aa54e05b4dee2ac8d1a319",
+        "path": "conftest.py"
+      },
+      {
+        "blob_sha": "75c61823b87164dde85ad0f2c78c300e011cc8a2",
+        "path": ".gitignore"
+      }
+    ],
+    "owner": "pallakatos",
+    "repo": "kars-pr-e2e-demo"
+  },
+  "schema_version": "1.0",
+  "synthetic_examples_only": true
+}
