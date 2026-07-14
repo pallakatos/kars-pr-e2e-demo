@@ -1,0 +1,3 @@
+{"ticket_id": "T-001", "is_synthetic": true, "payload": {"subject": "Refund request", "email": "alice@example.com", "phone": "+15551234567", "card_pan": "4111111111111111", "cvv": "123"}}
+{"ticket_id": "T-002", "is_synthetic": true, "payload": {"subject": "Charge dispute", "email": "bob@example.com", "note": "please call +15559876543"}}
+{"ticket_id": "T-003", "is_synthetic": true, "payload": {"subject": "Account lookup", "reference": "123456"}}
