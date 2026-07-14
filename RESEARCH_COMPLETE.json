@@ -1,0 +1,17 @@
+{
+  "status": "approved_for_delivery",
+  "base_sha": "6dc53d360a2f05bebcb9b8e61c4141f52c47b039",
+  "head_sha": "$(git -C /sandbox/kars-pr-e2e-demo rev-parse HEAD)",
+  "pr": {
+    "url": null,
+    "number": null
+  },
+  "acceptance_criteria_ids": ["AC001", "AC002", "AC003", "AC004", "AC005"],
+  "limitations": "Prototype limited to regex‑based redaction; does not parse structured JSON fields beyond strings.",
+  "work_packets": {
+    "PM": "Define user stories, rollout checklist, AC IDs.",
+    "Privacy": "Formal redaction spec, encryption for manual review tickets.",
+    "Backend": "Implement incident_triage module, CLI, unit tests.",
+    "QA": "Synthetic ticket generator, deterministic test harness, CI integration."
+  }
+}
