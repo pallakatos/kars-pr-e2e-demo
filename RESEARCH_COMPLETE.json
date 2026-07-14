@@ -33,10 +33,10 @@
     }
   ],
   "pr": {
-    "number": null,
-    "url": null,
-    "state": null
+    "number": 16,
+    "url": "https://github.com/pallakatos/kars-pr-e2e-demo/pull/16",
+    "state": "OPEN"
   },
-  "final_head_sha": null,
+  "final_head_sha": "f5c1d013a506f4699ea38247c1b56e6a18ddca36",
   "final_head_sha_semantics": "Set after PR creation to the immutable delivery-content commit immediately preceding the completion-metadata-only commit; a Git commit cannot embed its own SHA."
 }
