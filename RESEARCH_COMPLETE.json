@@ -1,17 +1,42 @@
 {
   "status": "approved_for_delivery",
   "base_sha": "6dc53d360a2f05bebcb9b8e61c4141f52c47b039",
-  "head_sha": "$(git -C /sandbox/kars-pr-e2e-demo rev-parse HEAD)",
+  "acceptance_criteria_ids": [
+    "AC001",
+    "AC002",
+    "AC003",
+    "AC004",
+    "AC005"
+  ],
+  "limitations": [
+    "The research is limited to synthetic ticket data and does not establish production accuracy or performance.",
+    "Regex-based redaction can produce false positives and false negatives, especially for novel or structured formats.",
+    "Encryption, retention enforcement, access control, telemetry, CLI behavior, and manual-review integration are proposed but not implemented by this research-only branch.",
+    "Attachments, HTML, ambiguous identifiers, and unsupported payload types require manual review before any production rollout."
+  ],
+  "work_packets": [
+    {
+      "id": "PM",
+      "deliverable": "Define user stories, stable acceptance IDs, rollout gates, and the delivery checklist."
+    },
+    {
+      "id": "Privacy",
+      "deliverable": "Formalize redaction rules, review-ticket encryption and retention, access controls, and audit requirements."
+    },
+    {
+      "id": "Backend",
+      "deliverable": "Implement the incident-triage library and JSONL CLI in a subsequent delivery change, with no raw-ticket persistence."
+    },
+    {
+      "id": "QA",
+      "deliverable": "Build a synthetic-ticket generator, deterministic acceptance harness, privacy-negative tests, and CI integration."
+    }
+  ],
   "pr": {
+    "number": null,
     "url": null,
-    "number": null
+    "state": null
   },
-  "acceptance_criteria_ids": ["AC001", "AC002", "AC003", "AC004", "AC005"],
-  "limitations": "Prototype limited to regex‑based redaction; does not parse structured JSON fields beyond strings.",
-  "work_packets": {
-    "PM": "Define user stories, rollout checklist, AC IDs.",
-    "Privacy": "Formal redaction spec, encryption for manual review tickets.",
-    "Backend": "Implement incident_triage module, CLI, unit tests.",
-    "QA": "Synthetic ticket generator, deterministic test harness, CI integration."
-  }
+  "final_head_sha": null,
+  "final_head_sha_semantics": "Set after PR creation to the immutable delivery-content commit immediately preceding the completion-metadata-only commit; a Git commit cannot embed its own SHA."
 }
