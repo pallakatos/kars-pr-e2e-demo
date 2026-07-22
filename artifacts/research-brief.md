@@ -1,0 +1,3 @@
+# Northstar research brief
+
+Recommend a deterministic sanitize-before-triage boundary for payment-outage tickets: typed redaction, keyed aliases, conservative manual review, safe rule-based classification, and bounded enum-only telemetry. The design is implementation-ready through 12 stable acceptance criteria and four non-overlapping work packets. Evidence is pinned to repository blobs, an authoritative NIST Privacy Framework page, Everything MCP checks, and the exact proof-stamper output. All examples/evaluation data are synthetic, production code is not included, and no compliance-certification claim is made.
