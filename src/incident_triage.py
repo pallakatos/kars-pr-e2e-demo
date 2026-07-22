@@ -140,6 +140,7 @@ def _redact_numeric(value: Union[int, float], key: str, state: _RedactionState) 
         return "<pan>"
     if _is_ambiguous_numeric(digits, key):
         state.flag_uncertain("ambiguous numeric identifier")
+        return "<ambiguous_numeric>"
     return value
 
 
@@ -152,6 +153,7 @@ def _redact_value(value: Any, key: str, state: _RedactionState) -> Any:
     if isinstance(value, str):
         if _is_ambiguous_numeric(value, key):
             state.flag_uncertain("ambiguous numeric identifier")
+            return "<ambiguous_numeric>"
         return _redact_scalar_string(value, key)
     # bool must remain distinct because it is a subclass of int.
     if isinstance(value, bool) or value is None:

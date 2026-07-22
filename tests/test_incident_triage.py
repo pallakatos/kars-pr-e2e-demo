@@ -115,10 +115,21 @@ def test_ac002_deterministic_rerun_identical():
 # ---------------------------------------------------------------------------
 
 def test_ac003_triage_uncertain_ambiguous_numeric():
-    ticket = _synthetic_ticket(ticket_id="T-003", reference="123456")
+    raw_identifier = "123456"
+    ticket = _synthetic_ticket(ticket_id="T-003", reference=raw_identifier)
     result = triage_ticket(ticket)
     assert result["status"] == "uncertain"
     assert "ambiguous numeric identifier" in result["reason"]
+    assert result["redacted_payload"]["reference"] == "<ambiguous_numeric>"
+    assert raw_identifier not in _flatten(result["redacted_payload"])
+
+
+def test_ac003_numeric_form_ambiguous_identifier_is_redacted():
+    raw_identifier = 123456
+    result = triage_ticket(_synthetic_ticket(ticket_id="T-003-NUM", reference=raw_identifier))
+    assert result["status"] == "uncertain"
+    assert result["redacted_payload"]["reference"] == "<ambiguous_numeric>"
+    assert str(raw_identifier) not in _flatten(result["redacted_payload"])
 
 
 # ---------------------------------------------------------------------------
@@ -178,9 +189,14 @@ def test_ac005_triage_cli_end_to_end(tmp_path):
         assert obj["status"] in ("redacted", "uncertain")
         assert isinstance(obj["redacted_payload"], dict)
 
-    # No raw PII in CLI stdout.
+    # No raw PII or ambiguous identifier in CLI stdout.
     assert RAW_EMAIL not in proc.stdout
     assert RAW_PAN not in proc.stdout
+    assert "123456" not in proc.stdout
+    assert lines[2]
+    ambiguous = json.loads(lines[2])
+    assert ambiguous["status"] == "uncertain"
+    assert ambiguous["redacted_payload"]["reference"] == "<ambiguous_numeric>"
 
 
 # ---------------------------------------------------------------------------
