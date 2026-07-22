@@ -218,3 +218,40 @@ def test_boundary_pan_length_edges():
         result = triage_ticket(_synthetic_ticket(ticket_id="T-PAN", note=pan))
         assert result["status"] == "redacted"
         assert pan not in _flatten(result["redacted_payload"])
+
+
+def test_numeric_pii_fields_are_redacted():
+    result = triage_ticket(
+        _synthetic_ticket(
+            ticket_id="T-NUMERIC",
+            card_pan=4111111111111111,
+            cvv=123,
+            account_id=987654321,
+        )
+    )
+    assert result["status"] == "redacted"
+    assert result["redacted_payload"] == {
+        "card_pan": "<pan>",
+        "cvv": "<cvv>",
+        "account_id": "<account_id>",
+    }
+
+
+def test_numeric_pii_nested_lists_and_float_forms_are_redacted():
+    result = triage_ticket(
+        _synthetic_ticket(
+            ticket_id="T-NUMERIC-NESTED",
+            customer={
+                "cards": [4111111111111111, 5555555555554444.0],
+                "credentials": [{"cvv": 123.0}, {"account_ids": [123456, 654321.0]}],
+            },
+            values=[4111111111111111],
+        )
+    )
+    payload = result["redacted_payload"]
+    assert payload["customer"]["cards"] == ["<pan>", "<pan>"]
+    assert payload["customer"]["credentials"] == [
+        {"cvv": "<cvv>"},
+        {"account_ids": ["<account_id>", "<account_id>"]},
+    ]
+    assert payload["values"] == ["<pan>"]

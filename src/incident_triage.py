@@ -121,8 +121,30 @@ class _RedactionState:
             self.reason = reason
 
 
+def _redact_numeric(value: Union[int, float], key: str, state: _RedactionState) -> Any:
+    """Redact JSON numeric leaves that represent labeled PII or a PAN."""
+    kl = key.lower()
+    if "account" in kl:
+        return "<account_id>"
+    if "cvv" in kl:
+        return "<cvv>"
+    if "pan" in kl or "card" in kl:
+        return "<pan>"
+
+    # Only integral numeric values can represent the digit-only identifiers
+    # handled by the string rules. Preserve unrelated numbers and their types.
+    if isinstance(value, float) and not value.is_integer():
+        return value
+    digits = str(int(value))
+    if _PAN_RE.fullmatch(digits):
+        return "<pan>"
+    if _is_ambiguous_numeric(digits, key):
+        state.flag_uncertain("ambiguous numeric identifier")
+    return value
+
+
 def _redact_value(value: Any, key: str, state: _RedactionState) -> Any:
-    """Recursively redact string leaves within nested payload structures."""
+    """Recursively redact PII leaves within nested payload structures."""
     if isinstance(value, dict):
         return {k: _redact_value(v, k, state) for k, v in value.items()}
     if isinstance(value, list):
@@ -131,7 +153,11 @@ def _redact_value(value: Any, key: str, state: _RedactionState) -> Any:
         if _is_ambiguous_numeric(value, key):
             state.flag_uncertain("ambiguous numeric identifier")
         return _redact_scalar_string(value, key)
-    # ints/floats/bools/None are passed through untouched.
+    # bool must remain distinct because it is a subclass of int.
+    if isinstance(value, bool) or value is None:
+        return value
+    if isinstance(value, (int, float)):
+        return _redact_numeric(value, key, state)
     return value
 
 
